@@ -1,9 +1,10 @@
 import express from "express";
-import { getPosts, createPosts } from "../controllers/posts.js";
+import { getPost, createPost, updatePost } from "../controllers/posts.js";
 const router = express.Router();
 
 // http://localhost:5000/posts
-router.get("/", getPosts);
-router.post("/", createPosts);
+router.get("/", getPost);
+router.post("/", createPost);
+router.patch("/:id", updatePost);
 
 export default router;
