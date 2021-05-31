@@ -3,9 +3,9 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
-import { createPost } from "../../actions/posts";
+import { createPost, updatePost } from "../../actions/posts";
 
-const Form = () => {
+const Form = (currentId, setCurrentId) => {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -15,11 +15,20 @@ const Form = () => {
   });
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(postData));
+
+    /*if there is an existing current id, update the post, if not, create a post */
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
   };
+
   const clear = () => {};
+
   return (
     <Paper className={classes.paper}>
       <form
