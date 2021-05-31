@@ -33,7 +33,8 @@ const Form = () => {
           name="creator"
           varient="outlined"
           label="Creator"
-          //fullWidthvalue={postData.creator}
+          fullWidth
+          value={postData.creator}
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
@@ -42,14 +43,16 @@ const Form = () => {
           name="title"
           varient="outlined"
           label="Title"
-          //fullWidthvalue={postData.title}
+          fullWidth
+          value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
         <TextField
           name="message"
           varient="outlined"
           label="Message"
-          //fullWidthvalue={postData.message}
+          fullWidth
+          value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
           }
@@ -58,7 +61,8 @@ const Form = () => {
           name="tags"
           varient="outlined"
           label="Tags"
-          //fullWidthvalue={postData.tags}
+          fullWidth
+          value={postData.tags}
           onChange={(e) =>
             setPostData({ ...postData, tags: e.target.value.split(",") })
           }
