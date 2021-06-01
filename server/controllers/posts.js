@@ -1,39 +1,65 @@
 import PostMessage from "../models/postMessage.js";
 import mongoose from "mongoose";
+import express from "express";
 
-export const getPost = async (req, res) => {
+const router = express.Router();
+
+export const getPosts = async (req, res) => {
   try {
     const postMessages = await PostMessage.find();
     res.status(200).json(postMessages);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: error });
+  }
+};
+
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await PostMessage.findById(id);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error });
   }
 };
 
 export const createPost = async (req, res) => {
-  const post = req.body;
-  const newPost = new PostMessage(post);
+  const { title, message, selectedFile, creator, tags } = req.body;
+
+  const newPostMessage = new PostMessage({
+    title,
+    message,
+    selectedFile,
+    creator,
+    tags,
+  });
 
   try {
-    await newPost.save();
-    res.status(201).json(newPost);
+    await newPostMessage.save();
+    res.status(201).json(newPostMessage);
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.status(409).json({ message: error });
   }
 };
 
 export const updatePost = async (req, res) => {
-  const { id: _id } = req.params;
-  const post = req.body;
+  const { id } = req.params;
+  const { title, message, creator, selectedFile, tags } = req.body;
 
-  if (!mongoose.Type.ObjectId.isValid(_id))
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("no post with that id");
 
-  const updatePost = await PostMessage.findByIdAndUpdate(
-    _id,
-    { ...post, _id },
-    { new: true }
-  );
+  const updatedPost = {
+    creator,
+    title,
+    message,
+    tags,
+    selectedFile,
+    _id: id,
+  };
+
+  await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
 
   res.json(updatePost);
 };
@@ -41,7 +67,7 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Type.ObjectId.isValid(id))
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("no post with that id");
 
   await PostMessage.findByIdAndRemove(id);
@@ -52,7 +78,7 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Type.ObjectId.isValid(id))
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("no post with that id");
 
   const post = await PostMessage.findById(id);
@@ -64,3 +90,5 @@ export const likePost = async (req, res) => {
 
   res.json(updatedPost);
 };
+
+export default router;
