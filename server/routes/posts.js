@@ -7,9 +7,12 @@ import {
   deletePost,
   likePost,
 } from "../controllers/posts.js";
+
+// create a router object from express
 const router = express.Router();
 
-// http://localhost:5000/posts
+// root site is http://localhost:5000/posts
+// add HTTP method routes
 router.get("/", getPosts);
 router.post("/", createPost);
 router.get("/:id", getPost);
