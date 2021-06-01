@@ -56,7 +56,9 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? `Editing "${post.title}"` : "Creating a Memory"}
+          {currentId
+            ? `Editing "${post.title}" from ${post.creator}`
+            : "Record your footprint 记录你的足迹"}
         </Typography>
         <TextField
           name="creator"
@@ -82,7 +84,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Message"
           fullWidth
           multiline
-          rows={4}
+          rows={3}
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
