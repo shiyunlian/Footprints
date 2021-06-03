@@ -1,4 +1,5 @@
-#Footprints
+# Footprints
+
 This is a full stack project called Footprints that consists of MongoDB, Express, React / Redux, and Node. js. You can login, create, update, and delete a post with picture.
 
 
