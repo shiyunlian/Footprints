@@ -15,7 +15,7 @@ app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
-  res.send("App is running.");
+  res.send("Footprints app is running.");
 });
 
 const PORT = process.env.PORT || 5000;
