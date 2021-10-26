@@ -21,7 +21,7 @@ This directory holds the source code for backend.
 Installs the required dependencies for this project.
 
 ## `cd client` and `cd server`
-Gets into the client and server directories. In the server directory, you need to create your own .env file which consists of your MongoDB URL. That is, you need to create your own database [here](https://account.mongodb.com/account/login?signedOut=true)<img width="867" alt="Screen Shot" src="https://user-images.githubusercontent.com/63085397/132142172-e57c20e4-6f3f-4314-96b8-bf1dadd63c8a.png">
+Gets into the client and server directories. In the server directory, you need to create your own .env file which consists of your MongoDB URL. That is, you need to create your own database [here](https://account.mongodb.com/account/login?signedOut=true)
 
 
 ## `npm start`
